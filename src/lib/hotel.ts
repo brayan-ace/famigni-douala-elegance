@@ -1,6 +1,7 @@
 export const HOTEL = {
   name: "Famigni Hotel",
   city: "Douala, Cameroon",
+  cityFr: "Douala, Cameroun",
   whatsapp: "237678671889",
   mapUrl: "https://maps.app.goo.gl/w8Hnw1VGptXqJjtP9",
 };

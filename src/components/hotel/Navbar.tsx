@@ -2,19 +2,22 @@ import { useEffect, useState } from "react";
 import { MessageCircle, Menu, X } from "lucide-react";
 import logo from "@/assets/famigni-logo.png";
 import { waLink } from "@/lib/hotel";
+import { useI18n } from "@/lib/i18n";
+import { LangToggle } from "@/components/hotel/LangToggle";
 
 const links = [
-  { href: "#stay", label: "Stay" },
-  { href: "#about", label: "About" },
-  { href: "#rooms", label: "Rooms" },
-  { href: "#amenities", label: "Amenities" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#location", label: "Location" },
+  { href: "#stay", key: "nav.stay" as const },
+  { href: "#about", key: "nav.about" as const },
+  { href: "#rooms", key: "nav.rooms" as const },
+  { href: "#amenities", key: "nav.amenities" as const },
+  { href: "#gallery", key: "nav.gallery" as const },
+  { href: "#location", key: "nav.location" as const },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -26,9 +29,7 @@ export function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-charcoal/85 backdrop-blur-xl border-b border-white/5"
-          : "bg-transparent"
+        scrolled ? "bg-charcoal/85 backdrop-blur-xl border-b border-white/5" : "bg-transparent"
       }`}
     >
       <div className="container-luxe flex items-center justify-between h-20">
@@ -39,61 +40,49 @@ export function Navbar() {
 
         <nav className="hidden lg:flex items-center gap-9">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-[13px] tracking-wider uppercase text-ivory/70 hover:text-bronze-soft transition-colors"
-            >
-              {l.label}
+            <a key={l.href} href={l.href} className="text-[13px] tracking-wider uppercase text-ivory/70 hover:text-bronze-soft transition-colors">
+              {t(l.key)}
             </a>
           ))}
         </nav>
 
         <div className="flex items-center gap-3">
+          <div className="hidden sm:block"><LangToggle tone="light" /></div>
           <a
-            href={waLink()}
+            href={waLink(t("wa.default"))}
             target="_blank"
             rel="noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 border border-bronze/60 text-ivory hover:bg-bronze hover:border-bronze transition-all px-5 py-2.5 text-[12px] tracking-[0.22em] uppercase"
+            className="hidden md:inline-flex items-center gap-2 border border-bronze/60 text-ivory hover:bg-bronze hover:border-bronze transition-all px-5 py-2.5 text-[12px] tracking-[0.22em] uppercase"
           >
             <MessageCircle className="size-4" />
-            Book on WhatsApp
+            {t("nav.bookWa")}
           </a>
-          <button
-            onClick={() => setOpen(!open)}
-            aria-label="Menu"
-            className="lg:hidden text-ivory p-2"
-          >
+          <button onClick={() => setOpen(!open)} aria-label="Menu" className="lg:hidden text-ivory p-2">
             {open ? <X className="size-6" /> : <Menu className="size-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
       <div
         className={`lg:hidden overflow-hidden transition-[max-height,opacity] duration-500 bg-charcoal/95 backdrop-blur-xl ${
-          open ? "max-h-[480px] opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[560px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="container-luxe py-6 flex flex-col gap-4">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="text-ivory/80 font-display text-2xl py-1"
-            >
-              {l.label}
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-ivory/80 font-display text-2xl py-1">
+              {t(l.key)}
             </a>
           ))}
+          <div className="pt-2"><LangToggle tone="light" /></div>
           <a
-            href={waLink()}
+            href={waLink(t("wa.default"))}
             target="_blank"
             rel="noreferrer"
-            className="mt-3 inline-flex items-center justify-center gap-2 bg-bronze text-ivory px-5 py-3 text-[12px] tracking-[0.22em] uppercase"
+            className="mt-1 inline-flex items-center justify-center gap-2 bg-bronze text-ivory px-5 py-3 text-[12px] tracking-[0.22em] uppercase"
           >
             <MessageCircle className="size-4" />
-            Book on WhatsApp
+            {t("nav.bookWa")}
           </a>
         </div>
       </div>
