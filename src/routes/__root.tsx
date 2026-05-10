@@ -76,6 +76,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Famigni Hotel — a refined boutique stay in Douala, Cameroon." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Famigni Hotel — Premium Comfort in Douala" },
+      { name: "twitter:title", content: "Famigni Hotel — Premium Comfort in Douala" },
+      { property: "og:description", content: "Famigni Hotel — a refined boutique stay in Douala, Cameroon." },
+      { name: "twitter:description", content: "Famigni Hotel — a refined boutique stay in Douala, Cameroon." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/360c18e9-665a-42c6-ae11-aacb610e6698/id-preview-606437d6--3c41cdb5-0f3e-41cb-8c56-18e6626378fc.lovable.app-1778374410856.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/360c18e9-665a-42c6-ae11-aacb610e6698/id-preview-606437d6--3c41cdb5-0f3e-41cb-8c56-18e6626378fc.lovable.app-1778374410856.png" },
     ],
     links: [
       {
